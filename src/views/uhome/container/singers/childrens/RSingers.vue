@@ -7,7 +7,7 @@
       <div class="singer-info">
         <div
           class="singer-img"
-          v-for="(item, index) in singerInfo"
+          v-for="(item, index) in pageSingerInfo"
           :key="index"
         >
           <a href="javascript:void(0);" @click="itemClick(item.singerid)">
@@ -18,6 +18,18 @@
           </a>
         </div>
       </div>
+      <div class="block">
+        <el-pagination
+          @current-change="handleCurrentChange"
+          :current-page.sync="currentPage"
+          :page-size="pagesize"
+          layout="total, prev, pager, next, jumper"
+          background
+          :total="singerInfo.length"
+          style="textAlign: center"
+        >
+        </el-pagination>
+      </div>
     </div>
   </div>
 </template>
@@ -26,7 +38,14 @@
 export default {
   name: "Rsingers",
   data() {
-    return {};
+    return {
+      total: 0,
+      //当前页数
+      currentPage: 1,
+      //1页10个数据
+      pagesize: 20,
+      pageSingerInfo: []
+    };
   },
   props: {
     title: {
@@ -41,6 +60,14 @@ export default {
     }
   },
   mounted() {},
+  watch: {
+    singerInfo(newValue, oldValue) {
+      this.pageSingerInfo = newValue.slice(
+        (this.currentPage - 1) * this.pagesize,
+        this.currentPage * this.pagesize
+      );
+    }
+  },
   methods: {
     itemClick(sid) {
       this.$router.push({
@@ -49,6 +76,15 @@ export default {
           sid
         }
       });
+    }, //点击之后的当前页数
+    handleCurrentChange(val) {
+      // 当前页数
+      this.currentPage = val;
+      // slice会改变原数组，故将其赋值给一个新数组从而展示这个新数组的数据
+      this.pageSingerInfo = this.singerInfo.slice(
+        (this.currentPage - 1) * this.pagesize,
+        this.currentPage * this.pagesize
+      );
     }
   }
 };
@@ -96,5 +132,9 @@ export default {
 #rsingers .singer-info .singer-img {
   margin-bottom: 20px;
   margin-right: 18px;
+}
+
+#rsingers .block {
+  margin-top: 70px;
 }
 </style>

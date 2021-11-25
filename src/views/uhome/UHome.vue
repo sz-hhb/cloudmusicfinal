@@ -5,7 +5,7 @@
         <headers></headers>
       </el-header>
       <el-main>
-        <keep-alive exclude="Find,Song,Singer">
+        <keep-alive exclude="Find,Song,Singer,Singers,Video">
           <router-view
             :key="
               $route.name +

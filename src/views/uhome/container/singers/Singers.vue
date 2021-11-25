@@ -136,7 +136,7 @@ export default {
     },
     findSingerByTypename(typename) {
       findSingerByTypename(typename).then(res => {
-        console.log(res);
+        // console.log(res);
         res.forEach(data => {
           data.singerphotourl =
             "http://localhost:8090/musicstatic/" + data.singerphotourl;
