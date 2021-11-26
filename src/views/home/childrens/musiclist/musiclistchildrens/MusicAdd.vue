@@ -172,7 +172,7 @@ export default {
               type: "success"
             });
           } else {
-            this.$message.error("添加失败！");
+            this.$message.error("添加失败！已存在歌曲！");
           }
           this.dialogFormVisible = false;
           this.refresh();

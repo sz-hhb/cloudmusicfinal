@@ -27,6 +27,8 @@
           background
           :total="singerInfo.length"
           style="textAlign: center"
+          @prev-click="prevClick"
+          @next-click="nextClick"
         >
         </el-pagination>
       </div>
@@ -85,6 +87,12 @@ export default {
         (this.currentPage - 1) * this.pagesize,
         this.currentPage * this.pagesize
       );
+    },
+    prevClick() {
+      window.scrollTo(0, 0);
+    },
+    nextClick() {
+      window.scrollTo(0, 0);
     }
   }
 };

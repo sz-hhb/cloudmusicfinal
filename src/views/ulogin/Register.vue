@@ -163,15 +163,19 @@ export default {
             this.form.email
           ).then(res => {
             console.log(res);
-            if (res === "error") {
+            if (res === "error1") {
               this.$message.error("用户名重复！");
+            } else if (res === "error2") {
+              this.$message.error("邮箱重复！");
+            } else if (res === "error3") {
+              this.$message.error("手机重复！");
             } else {
               this.$message({
                 message: "注册成功!",
                 type: "success"
               });
               this.$router.push({
-                path: "/ulogin"
+                path: "/find"
               });
             }
           });

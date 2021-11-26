@@ -69,6 +69,8 @@
               background
               :total="comments.length"
               style="textAlign: center"
+              @prev-click="prevClick"
+              @next-click="nextClick"
             >
             </el-pagination>
           </div>
@@ -249,6 +251,12 @@ export default {
     },
     refresh() {
       this.reload();
+    },
+    prevClick() {
+      window.scrollTo(40, 400);
+    },
+    nextClick() {
+      window.scrollTo(40, 400);
     }
   }
 };

@@ -158,7 +158,7 @@ export default {
             });
             this.refresh();
           } else {
-            this.$message.error("更新失败！");
+            this.$message.error("更新失败！已存在歌曲！");
           }
           this.refresh();
         })

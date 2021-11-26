@@ -112,8 +112,12 @@ export default {
         cancelButtonText: "取消",
         inputPlaceholder: this.updateForm.musicTypeName
       }).then(({ value }) => {
-        this.updateMusicTypeById(this.updateForm.musicTypeId, value);
-        this.refresh();
+        if (value === null) {
+          this.$message.error("歌曲类型不能为空！");
+        } else {
+          this.updateMusicTypeById(this.updateForm.musicTypeId, value);
+          this.refresh();
+        }
       });
     },
     //删除
@@ -170,7 +174,7 @@ export default {
               type: "success"
             });
           } else {
-            this.$message.error("更新失败！");
+            this.$message.error("更新失败！已存在！");
           }
         })
         .catch(() => {
@@ -197,16 +201,22 @@ export default {
         cancelButtonText: "取消"
       })
         .then(({ value }) => {
-          insertMusicType(value).then(res => {
-            console.log(res);
-            if (res === "success") {
-              this.$message({
-                type: "success",
-                message: "添加成功！ "
-              });
-            }
-            this.refresh();
-          });
+          if (value === null) {
+            this.$message.error("歌曲类型不能为空！");
+          } else {
+            insertMusicType(value).then(res => {
+              console.log(res);
+              if (res === "success") {
+                this.$message({
+                  type: "success",
+                  message: "添加成功！ "
+                });
+              } else {
+                this.$message.error("添加失败！已存在！");
+              }
+              this.refresh();
+            });
+          }
         })
         .catch(() => {
           this.$message({

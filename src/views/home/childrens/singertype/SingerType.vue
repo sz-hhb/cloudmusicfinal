@@ -100,20 +100,27 @@ export default {
         cancelButtonText: "取消"
       })
         .then(({ value }) => {
-          insertType(value)
-            .then(res => {
-              console.log(res);
-              if (res === "success") {
-                this.$message({
-                  type: "success",
-                  message: "添加成功！ "
-                });
-              }
-              this.refresh();
-            })
-            .catch(() => {
-              this.$message.error("请输入完整信息！");
-            });
+          console.log(value);
+          if (value === null) {
+            this.$message.error("歌手类型不能为空！");
+          } else {
+            insertType(value)
+              .then(res => {
+                // console.log(res);
+                if (res === "success") {
+                  this.$message({
+                    type: "success",
+                    message: "添加成功！ "
+                  });
+                } else {
+                  this.$message.error("添加失败！已存在");
+                }
+                this.refresh();
+              })
+              .catch(() => {
+                this.$message.error("请输入完整信息！");
+              });
+          }
         })
         .catch(() => {
           this.$message({
@@ -128,18 +135,22 @@ export default {
         cancelButtonText: "取消"
       })
         .then(({ value }) => {
-          updateType(row.typeid, value).then(res => {
-            // console.log(res);
-            if (res === "success") {
-              this.$message({
-                type: "success",
-                message: "更新成功！ "
-              });
-            } else {
-              this.$message.error("更新失败！");
-            }
-            this.refresh();
-          });
+          if (value === null) {
+            this.$message.error("歌手类型不能为空！");
+          } else {
+            updateType(row.typeid, value).then(res => {
+              // console.log(res);
+              if (res === "success") {
+                this.$message({
+                  type: "success",
+                  message: "更新成功！ "
+                });
+              } else {
+                this.$message.error("更新失败！已存在！");
+              }
+              this.refresh();
+            });
+          }
         })
         .catch(() => {
           this.$message({
