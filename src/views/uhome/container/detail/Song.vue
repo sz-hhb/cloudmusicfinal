@@ -198,7 +198,7 @@ export default {
   methods: {
     findMusicById(musicid) {
       findMusicById(musicid).then(res => {
-        console.log(res);
+        // console.log(res);
         res.musicphotourl =
           "http://localhost:8090/musicstatic/" + res.musicphotourl;
         res.songurl = "http://localhost:8090/musicstatic/" + res.songurl;
@@ -209,7 +209,7 @@ export default {
     },
     findSameMusicByMusicType(musicTypeId) {
       findSameMusicByMusicType(musicTypeId).then(res => {
-        console.log(res);
+        // console.log(res);
         res.forEach(data => {
           data.musicphotourl =
             "http://localhost:8090/musicstatic/" + data.musicphotourl;
@@ -220,7 +220,7 @@ export default {
     },
     findSameSingerByTypeid(typeid) {
       findSameSingerByTypeid(typeid).then(res => {
-        console.log(res);
+        // console.log(res);
         res.forEach(data => {
           data.singerphotourl =
             "http://localhost:8090/musicstatic/" + data.singerphotourl;

@@ -78,7 +78,8 @@ export default {
           { required: true, message: "请输入邮箱", trigger: "blur" },
           { validator: validateEmail, trigger: "blur" }
         ]
-      }
+      },
+      isShow: true
     };
   },
   mounted() {
@@ -105,8 +106,10 @@ export default {
                 type: "success",
                 message: "修改成功！"
               });
+              this.$store.commit("saveIsShow", this.isShow);
+              this.$store.commit("saveUserName", "");
               this.$router.push({
-                path: "/ulogin"
+                path: "/find"
               });
             } else {
               this.$message.error("用户名已存在！");

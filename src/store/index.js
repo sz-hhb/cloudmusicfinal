@@ -5,7 +5,7 @@ Vue.use(Vuex);
 
 const state = sessionStorage.getItem("state")
   ? JSON.parse(sessionStorage.getItem("state"))
-  : { saveUserName: "", isShow: true, MusicUrl: "" };
+  : { saveUserName: "", isShow: true };
 
 export default new Vuex.Store({
   state,
@@ -15,9 +15,6 @@ export default new Vuex.Store({
     },
     saveIsShow(state, data) {
       state.isShow = data;
-    },
-    saveMusicUrl(state, data) {
-      state.MusicUrl = data;
     }
   },
   actions: {},

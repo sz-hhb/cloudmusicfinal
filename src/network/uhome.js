@@ -176,3 +176,13 @@ export function searchVideo(videoname) {
     }
   });
 }
+
+export function deleteMessage(messageid) {
+  return request({
+    method,
+    url: "/message/deleteMessage",
+    data: {
+      messageid
+    }
+  });
+}

@@ -126,7 +126,7 @@ export default {
     return {
       singerInfo: {},
       singerHotInfo: [],
-      musicInfo: [], // 当前播放音乐的总时间
+      musicInfo: [], 
       singer: {},
       musicTime: "0:00",
       // 当前播放的音乐时间

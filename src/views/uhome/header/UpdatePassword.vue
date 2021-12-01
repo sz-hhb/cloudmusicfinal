@@ -81,7 +81,8 @@ export default {
           { required: true, message: "请再次输入密码", trigger: "blur" },
           { min: 6, max: 12, message: "长度在 6 到 12 个字符", trigger: "blur" }
         ]
-      }
+      },
+      isShow: true
     };
   },
   mounted() {
@@ -108,8 +109,10 @@ export default {
                 type: "success",
                 message: "修改成功！"
               });
+              this.$store.commit("saveIsShow", this.isShow);
+              this.$store.commit("saveUserName", "");
               this.$router.push({
-                path: "/ulogin"
+                path: "/find"
               });
             } else {
               this.$message.error("修改失败！");

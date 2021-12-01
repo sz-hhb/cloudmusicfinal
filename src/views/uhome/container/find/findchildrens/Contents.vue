@@ -96,7 +96,11 @@
             />
             <h4>音乐排行榜</h4>
           </div>
-          <rank :info="musicHotInfo" @play="onlyPlay"></rank>
+          <rank
+            :info="musicHotInfo"
+            @play="onlyPlay"
+            @click.native="isAction(1)"
+          ></rank>
         </div>
         <div class="singer-rank">
           <div class="title">
@@ -341,9 +345,6 @@ export default {
         this.singerHotInfo = res;
       });
     },
-    getUrl(videoid) {
-      return "/video?vid=" + videoid;
-    },
     play() {
       // console.log(data);
       // console.log(this.playWidth);
@@ -496,6 +497,7 @@ export default {
         // 给src赋值前一条音乐的url 并且播放
         this.saveMusicUrl = this.musicInfo[index - 1].songurl;
         this.musicPhotoUrl = this.musicInfo[index - 1].musicphotourl;
+        this.singerName = this.musicInfo[index - 1].singer.singername;
         this.$refs.audio.src =
           "http://localhost:8090/musicstatic/" + this.musicUrls[index - 1];
         this.$refs.audio.play();
@@ -535,6 +537,7 @@ export default {
         // 给src赋值前一条音乐的url 并且播放
         this.saveMusicUrl = this.musicHotInfo[index - 1].songurl;
         this.musicPhotoUrl = this.musicHotInfo[index - 1].musicphotourl;
+        this.singerName = this.musicHotInfo[index - 1].singer.singername;
         this.$refs.audio.src =
           "http://localhost:8090/musicstatic/" + this.musicUrls[index - 1];
         this.$refs.audio.play();
@@ -596,6 +599,7 @@ export default {
         // 给src赋值前一条音乐的url 并且播放
         this.saveMusicUrl = this.musicInfo[index + 1].songurl;
         this.musicPhotoUrl = this.musicInfo[index + 1].musicphotourl;
+        this.singerName = this.musicInfo[index + 1].singer.singername;
         this.$refs.audio.src =
           "http://localhost:8090/musicstatic/" + this.musicUrls[index + 1];
         this.musicCurrentTime = "0:00";
@@ -637,6 +641,7 @@ export default {
         // 给src赋值前一条音乐的url 并且播放
         this.saveMusicUrl = this.musicHotInfo[index + 1].songurl;
         this.musicPhotoUrl = this.musicHotInfo[index + 1].musicphotourl;
+        this.singerName = this.musicHotInfo[index + 1].singer.singername;
         this.$refs.audio.src =
           "http://localhost:8090/musicstatic/" + this.musicUrls[index + 1];
         this.$refs.audio.play();

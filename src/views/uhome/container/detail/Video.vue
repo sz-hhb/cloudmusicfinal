@@ -55,7 +55,17 @@
                 <div class="user-info">
                   <span class="user-name">{{ item.user.userName }}</span>
                   <span class="user-message">：{{ item.messagecomment }}</span>
-                  <div class="user-time">{{ item.messagetime }}</div>
+                  <div class="user-time">
+                    {{ item.messagetime
+                    }}<el-button
+                      type="danger"
+                      size="mini"
+                      class="delete"
+                      v-if="item.user.userName === $store.state.saveUserName"
+                      @click="deleteClick(item.messageid)"
+                      >删除</el-button
+                    >
+                  </div>
                 </div>
               </div>
             </div>
@@ -116,7 +126,8 @@ import {
   randomVideo,
   findMessageByVid,
   insertMessage,
-  findUserByName
+  findUserByName,
+  deleteMessage
 } from "network/uhome.js";
 import fmtDate from "common/js/Date.js";
 export default {
@@ -177,7 +188,7 @@ export default {
     },
     findMessageByVid(vid) {
       findMessageByVid(vid).then(res => {
-        console.log(res);
+        // console.log(res);
         res.forEach(data => {
           data.messagetime = this.dateFmt(data.messagetime);
         });
@@ -257,6 +268,27 @@ export default {
     },
     nextClick() {
       window.scrollTo(40, 400);
+    },
+    deleteClick(messageid) {
+      this.$confirm("此操作将永久删除该评论, 是否继续?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      }).then(() => {
+        deleteMessage(messageid)
+          .then(res => {
+            if (res === "success") {
+              this.$message({
+                type: "success",
+                message: "删除成功！"
+              });
+            }
+            this.refresh();
+          })
+          .catch(() => {
+            this.$message.error("删除失败！");
+          });
+      });
     }
   }
 };
@@ -357,9 +389,16 @@ export default {
 }
 
 #video .center .cleft .comment-info .user-info .user-time {
+  display: flex;
+  align-items: center;
   font-size: 12px;
   margin-top: 10px;
   color: #999;
+}
+
+#video .center .cleft .comment-info .user-info .user-time .delete {
+  position: absolute;
+  left: 780px;
 }
 
 #video .center .cleft .comment img {
